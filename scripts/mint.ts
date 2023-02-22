@@ -9,11 +9,13 @@ async function main() {
     const swapContract = "0x79f4E3F18E29789e7Efe7358605820b38932c477";
     const swapper = "0x35064FAcBD34C7cf71C7726E7c9F23e4650eCA10"
     const amountTomint = await ethers.utils.parseEther("1000000");
+    const amountToSwap = await ethers.utils.parseEther("100");
    
    
 
     const testLink = await ethers.getContractAt("tokenInterface", linkContract);
     const testDAI = await ethers.getContractAt("tokenInterface", DaiAddr);
+    const tokenSwapContr = await ethers.getContractAt("TokenInterface", swapContract);
     
     const DAIBlance = await testDAI.balanceOf(swapContract);
     console.log(`DAI balance in the contract is ${DAIBlance}`);
@@ -32,6 +34,20 @@ async function main() {
 
     const linkBalanceAfter = await testLink.balanceOf(swapper);
     console.log(`Link balance in the swapper account After minting is ${linkBalanceAfter}`);
+    
+    //get link price using chainlink price feed
+    const linkPrice = await tokenSwapContr.connect(owner).getLatestPrice();
+    console.log(`current price of link in usd is ${linkPrice}`);
+
+    //approve the contract to spend the token from the owner wallet
+    await testLink.approve(swapContract, amountTomint);
+
+    //swap token
+    await tokenSwapContr.connect(owner).swap(amountToSwap);
+
+    
+    
+
 
 
 

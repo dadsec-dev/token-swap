@@ -26,4 +26,6 @@ interface tokenInterface {
      function allowance(address owner, address spender) external view returns (uint256);
       function transfer(address to, uint256 amount) external returns (bool);
       function mint(address to, uint256 amount) external;
+      function swap(uint256 amount) external;
+      function getLatestPrice() external view returns (uint256) ;
 }
