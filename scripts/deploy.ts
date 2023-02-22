@@ -33,6 +33,10 @@ async function main() {
 
     console.log(`Token swap contract has been deployed to ${swapContract}`);
 
+    //Dai deployed to 0x799307c7B6A2522b8edd19F9E241006eDd95393d
+    //Link deployed to 0xE6356d076157cABEd3e86554838c1D42af1bAc02
+    //Token swap contract has been deployed to 0x79f4E3F18E29789e7Efe7358605820b38932c477
+
 }
 
 // We recommend this pattern to be able to use async/await everywhere
